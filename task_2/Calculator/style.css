@@ -1,0 +1,266 @@
+:root {
+    --background-image: url(images/image1.jpeg);
+    --container-bg: #2c3e50;
+    --input-bg: #ecf0f1;
+    --text-color: #326497;
+    --button-bg: #1d252b;
+    --button-text-color: #ffffff;
+}
+
+.light-mode {
+    --background-image: url(images/image3.jpeg);
+    --container-bg: #ffffff;
+    --input-bg: #34495e;
+    --text-color: #ffffff;
+    --button-bg: #344953;
+    --button-text-color: #ffffff;
+}
+
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background-image: var(--background-image);
+    background-size: cover;
+    background-position: center;
+}
+
+.container {
+    position: relative;
+    min-width: 380px;
+    max-height: 650px;
+    padding: 40px 30px 30px;
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(10px);
+    border-radius: 20px;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+    transition: all 0.3s ease;
+}
+
+.container:hover {
+    transform: translateY(-10px);
+    box-shadow: 25px 25px 75px rgba(0, 0, 0, 0.25), 10px 10px 90px rgba(0, 0, 0, 0.45);
+}
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+@keyframes bounce {
+    0% { transform: translateY(0); }
+    50% { transform: translateY(-10px); }
+    100% { transform: translateY(0); }
+}
+
+.animated-message {
+    position: fixed;
+    top: 20px;
+    left: 20px;
+    padding: 20px;
+    background: #191e22;
+    color: white;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5), 0 0 15px rgba(0, 0, 0, 0.3);
+    font-family: 'Arial', sans-serif; /* Change font here */
+    font-size: 1.2em;
+    font-weight: bold;
+    text-align: center;
+    animation: fadeIn 1s ease-out, bounce 1s ease-out;
+    animation-fill-mode: both; /* Ensures animation stays after completion */
+    border: 2px solid rgba(255, 255, 255, 0.6); /* Light border to enhance the glow */
+    text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.3); /* Shadow to make text pop */
+    overflow: hidden; /* Ensure text does not overflow container */
+    white-space: nowrap; /* Ensure text stays in one line */
+    width: 500px; /* Adjust width as needed */
+}
+
+.animated-message.glow {
+    background: #0e1214;
+    box-shadow: 0 4px 10px rgba(36, 18, 32, 0.7), 0 0 20px rgba(255, 255, 255, 0.6); /* Glow effect */
+}
+
+.typing-effect {
+    display: inline-block;
+    border-right: 2px solid rgba(255, 255, 255, 0.75);
+    white-space: nowrap;
+    overflow: hidden;
+    animation: typing 4s steps(30, end), blink-caret 0.75s step-end infinite;
+}
+
+@keyframes typing {
+    from { width: 0; }
+    to { width: 100%; }
+}
+
+@keyframes blink-caret {
+    from, to { border-color: transparent; }
+    50% { border-color: rgba(255, 255, 255, 0.75); }
+}
+
+
+
+.calculator {
+    position: relative;
+    display: grid;
+    grid-template-columns: repeat(4, 80px);
+    gap: 8px;
+}
+
+.calculator .value {
+    position: relative;
+    grid-column: span 4;
+    height: 100px;
+    left: 10px;
+    width: calc(100% - 20px);
+    border: none;
+    outline: none;
+    background: var(--input-bg);
+    margin-bottom: 10px;
+    border-radius: 10px;
+    box-shadow: 0 0 0 2px rgba(0,0,0,0.75);
+    text-align: right;
+    padding: 10px;
+    font-size: 2em;
+    color: var(--text-color);
+}
+
+.calculator span {
+    display: grid;
+    place-items: center;
+    width: 80px;
+    height: 80px;
+    background: var(--button-bg);
+    box-shadow: inset -8px 0px 8px rgba(0,0,0,0.25), 0 0 0 2px rgba(0,0,0,0.25), 10px 20px 25px rgba(0,0,0,0.4);
+    color: var(--button-text-color);
+    user-select: none;
+    cursor: pointer;
+    font-weight: 400;
+    border-radius: 10px;
+    transition: background-color 0.2s ease, transform 0.1s ease;
+}
+
+.theme-toggle {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    display: flex;
+    align-items: center;
+}
+
+.theme-toggle .theme-label {
+    margin-left: 10px;
+    color: var(--text-color);
+}
+
+.switch {
+    position: relative;
+    display: inline-block;
+    width: 60px;
+    height: 34px;
+}
+
+.switch input {
+    opacity: 0;
+    width: 0;
+    height: 0;
+}
+
+.slider {
+    position: absolute;
+    cursor: pointer;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: #0a0909;
+    transition: .4s;
+    border-radius: 34px;
+}
+
+.slider:before {
+    position: absolute;
+    content: "";
+    height: 26px;
+    width: 26px;
+    left: 4px;
+    bottom: 4px;
+    background-color: white;
+    transition: .4s;
+    border-radius: 50%;
+}
+
+input:checked + .slider {
+    background-color: #2e4b63;
+}
+
+input:checked + .slider:before {
+    transform: translateX(26px);
+}
+
+.calculator span:active {
+    background-color: #c2e4dd;
+    transform: scale(0.95);
+}
+
+.calculator span:hover {
+    background-color: #2ecc71;
+}
+
+.calculator .clear {
+    grid-column: span 2;
+    background: #e74c3c;
+    width: 160px;
+}
+
+.calculator .plus {
+    grid-row: span 2;
+    height: 140px;
+}
+
+.calculator .equal {
+    background: #2980b9;
+}
+
+.calculator .equal:hover, .calculator .clear:hover {
+    background-color: #e67e22;
+}
+
+@media (min-width: 768px) {
+    /* For tablets and small laptops */
+    .calculator span {
+        height: 70px;
+        font-size: 1.2em;
+    }
+
+    .calculator .value {
+        font-size: 2em;
+    }
+
+    .container {
+        padding: 30px 20px 20px;
+    }
+}
+
+@media (min-width: 480px) {
+    /* For mobile phones */
+    .calculator span {
+        height: 60px;
+        font-size: 1.1em;
+    }
+
+    .calculator .value {
+        height: 80px;
+        font-size: 1.8em;
+    }
+
+    .container {
+        padding: 20px 10px 10px;
+        border-radius: 15px;
+    }
+
+    .theme-toggle {
+        margin-bottom: 20px;
+    }
+}

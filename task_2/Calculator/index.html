@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Let's do Math</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    
+    <!-- Typing Effect Container -->
+<div id="animatedMessage" class="animated-message">
+    <div id="typing-text"></div>
+</div>
+
+    <div class="theme-toggle">
+        <label class="switch">
+            <input type="checkbox" id="themeSwitcher">
+            <span class="slider"></span>
+        </label>
+        <span class="theme-label"> Dark/Light Mode</span>
+    </div>
+
+    <div class="container">
+        <form name="calc" class="calculator">
+            <input type="text" name="txt" class="value" readonly="">
+            <span class="num clear" onclick="clearDisplay()">C<i></i></span>
+            <span class="num" onclick="appendValue('/')"><i>/</i></span>
+            <span class="num" onclick="appendValue('*')"><i>*</i></span>
+            <span class="num" onclick="appendValue('7')"><i>7</i></span>
+            <span class="num" onclick="appendValue('8')"><i>8</i></span>
+            <span class="num" onclick="appendValue('9')"><i>9</i></span>
+            <span class="num" onclick="appendValue('-')"><i>-</i></span>
+            <span class="num" onclick="appendValue('4')"><i>4</i></span>
+            <span class="num" onclick="appendValue('5')"><i>5</i></span>
+            <span class="num" onclick="appendValue('6')"><i>6</i></span>
+            <span class="num plus" onclick="appendValue('+')"><i>+</i></span>
+            <span class="num" onclick="appendValue('1')"><i>1</i></span>
+            <span class="num" onclick="appendValue('2')"><i>2</i></span>
+            <span class="num" onclick="appendValue('3')"><i>3</i></span>
+            <span class="num" onclick="appendValue('0')"><i>0</i></span>
+            <span class="num" onclick="appendValue('00')"><i>00</i></span>
+            <span class="num" onclick="appendValue('.')"><i>.</i></span>
+            <span class="num equal" onclick="calculateResult()"><i>=</i></span>
+            <span class="num" onclick="backspace()"><i>←</i></span>
+        </form>
+    </div>
+    
+    <script>
+        window.onload = function() {
+    var message = document.getElementById("animatedMessage");
+    var typingText = document.getElementById("typing-text");
+    var text = "Welcome to Let's Do Math! Enjoy your calculations.";
+    var index = 0;
+    var speed = 100; // Speed of typing in milliseconds
+
+    function typeText() {
+        if (index < text.length) {
+            typingText.innerHTML += text.charAt(index);
+            index++;
+            setTimeout(typeText, speed);
+        } else {
+            // Optionally, you can add a glowing effect or other animations here
+        }
+    }
+
+    message.style.display = "block";
+    typeText();
+};
+
+        const themeSwitcher = document.getElementById('themeSwitcher');
+        const body = document.body;
+
+        themeSwitcher.addEventListener('change', function() {
+            if (this.checked) {
+                body.classList.add('light-mode');
+            } else {
+                body.classList.remove('light-mode');
+            }
+        });
+    </script>
+
+    <script>
+        function appendValue(value) {
+            document.calc.txt.value += value;
+        }
+
+        function calculateResult() {
+            try {
+                document.calc.txt.value = eval(document.calc.txt.value) || "";
+            } catch (e) {
+                document.calc.txt.value = "Error";
+            }
+        }
+
+        function clearDisplay() {
+            document.calc.txt.value = "";
+        }
+
+        function backspace() {
+            document.calc.txt.value = document.calc.txt.value.slice(0, -1);
+        }
+    </script>
+</body>
+</html>
